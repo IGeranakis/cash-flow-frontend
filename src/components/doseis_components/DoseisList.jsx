@@ -70,7 +70,8 @@ const DoseisList =(props) => {
         { field: 'ammount', header: 'Ποσό Δόσης' },
         { field: 'estimate_payment_date', header: 'Εκτιμώμενη ημερομηνία πληρωμής' },
         { field: 'actual_payment_date', header: 'Πραγματική ημερομηνία πληρωμής' },
-        { field: 'status', header: 'Κατάσταση Δόσης' }
+        { field: 'status', header: 'Κατάσταση Δόσης' },
+        {field: "comment", header: "Σχόλια"},
     ];
 
     const onCellEditComplete = async (e) => {
