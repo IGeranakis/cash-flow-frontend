@@ -35,7 +35,7 @@ const PaidExodaList = () => {
     const [filtercalled,setfiltercalled]=useState(false)
     const [combinedData,setCombinedData]=useState([])
     const [provider, setProvider] = useState([])
-    
+    const [filteredData, setFilteredData] = useState([]);
     const [ypoxreoseis, setYpoxreoseis] = useState([])
     const[selectedIdType,setSelectedIdType]=useState([])
     const [visible, setVisible] = useState(false); // State to control the visibility of the popup
@@ -291,6 +291,9 @@ const idBodyTemplate = (rowData) => {
         ];
         console.log("Combined Data: ", doseis);
         setCombinedData(combinedData2)
+        setFilteredData(combinedData2 || []);
+
+        console.log("Combined Data2: ", combinedData);
 
         const uniqueProviders = [...new Set(combinedData2.map(item => item.provider?.trim() || 'N/A'))];
         console.log("Unique Providers (for filter): ", uniqueProviders);
@@ -325,7 +328,7 @@ const idBodyTemplate = (rowData) => {
             // Create data rows with headers first
             const data = [
                 headers,  // First row with headers
-                ...combinedData.map((product) =>
+                ...filteredData.map((product) =>
                     cols.map((col) => {
                      
                         // Check if the field is 'ammount' or any other amount field that needs formatting
@@ -393,6 +396,8 @@ const idBodyTemplate = (rowData) => {
         if(e.length>0){
             setfiltercalled(true)
         }
+
+        setFilteredData(visibleRows);
 
         // // Calculate total income for the visible rows
         const incomeSum = visibleRows.reduce((sum, row) => sum + Number((row.income || 0)), 0);
